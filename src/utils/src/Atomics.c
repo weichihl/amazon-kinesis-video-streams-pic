@@ -1,7 +1,7 @@
 #ifndef __UTILS_ATOMICS__
 #define __UTILS_ATOMICS__
 
-#ifdef  __cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -35,7 +35,7 @@ PUBLIC_API atomicAnd globalAtomicAnd = defaultAtomicAnd;
 PUBLIC_API atomicOr globalAtomicOr = defaultAtomicOr;
 PUBLIC_API atomicXor globalAtomicXor = defaultAtomicXor;
 
-#ifdef  __cplusplus
+#ifdef __cplusplus
 }
 #endif
-#endif  /* __UTILS_ATOMICS__ */
+#endif /* __UTILS_ATOMICS__ */

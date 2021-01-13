@@ -8,12 +8,8 @@
 /**
  * Creates a new state machine
  */
-STATUS createStateMachine(PStateMachineState pStates,
-                          UINT32 stateCount,
-                          UINT64 customData,
-                          GetCurrentTimeFunc getCurrentTimeFunc,
-                          UINT64 getCurrentTimeFuncCustomData,
-                          PStateMachine* ppStateMachine)
+STATUS createStateMachine(PStateMachineState pStates, UINT32 stateCount, UINT64 customData, GetCurrentTimeFunc getCurrentTimeFunc,
+                          UINT64 getCurrentTimeFuncCustomData, PStateMachine* ppStateMachine)
 {
     ENTERS();
     STATUS retStatus = STATUS_SUCCESS;
@@ -164,8 +160,8 @@ STATUS stepStateMachine(PStateMachine pStateMachine)
         pStateMachineImpl->context.retryCount = 0;
         pStateMachineImpl->context.time = time;
 
-        DLOGD("State Machine - Current state: 0x%016" PRIx64 ", Next state: 0x%016" PRIx64,
-              pStateMachineImpl->context.pCurrentState->state, nextState);
+        DLOGD("State Machine - Current state: 0x%016" PRIx64 ", Next state: 0x%016" PRIx64, pStateMachineImpl->context.pCurrentState->state,
+              nextState);
     } else {
         // Increment the state retry count
         pStateMachineImpl->context.retryCount++;
@@ -182,8 +178,7 @@ STATUS stepStateMachine(PStateMachine pStateMachine)
     // Execute the state function if specified
     // execute the function of the next state.
     if (pStateMachineImpl->context.pCurrentState->executeStateFn != NULL) {
-        CHK_STATUS(pStateMachineImpl->context.pCurrentState->executeStateFn(pStateMachineImpl->customData,
-                                                                            pStateMachineImpl->context.time));
+        CHK_STATUS(pStateMachineImpl->context.pCurrentState->executeStateFn(pStateMachineImpl->customData, pStateMachineImpl->context.time));
     }
 
 CleanUp:
@@ -204,7 +199,8 @@ STATUS acceptStateMachineState(PStateMachine pStateMachine, UINT64 requiredState
     CHK(pStateMachineImpl != NULL, STATUS_NULL_ARG);
 
     // Check the current state
-    CHK((requiredStates & pStateMachineImpl->context.pCurrentState->state) == pStateMachineImpl->context.pCurrentState->state, STATUS_INVALID_STREAM_STATE);
+    CHK((requiredStates & pStateMachineImpl->context.pCurrentState->state) == pStateMachineImpl->context.pCurrentState->state,
+        STATUS_INVALID_STREAM_STATE);
 
 CleanUp:
 

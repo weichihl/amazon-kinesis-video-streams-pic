@@ -15,7 +15,7 @@ STATUS readFile(PCHAR filePath, BOOL binMode, PBYTE pBuffer, PUINT64 pSize)
 {
     UINT64 fileLen;
     STATUS retStatus = STATUS_SUCCESS;
-    FILE *fp = NULL;
+    FILE* fp = NULL;
 
     CHK(filePath != NULL && pSize != NULL, STATUS_NULL_ARG);
 
@@ -66,7 +66,7 @@ STATUS readFileSegment(PCHAR filePath, BOOL binMode, PBYTE pBuffer, UINT64 offse
 {
     UINT64 fileLen;
     STATUS retStatus = STATUS_SUCCESS;
-    FILE *fp = NULL;
+    FILE* fp = NULL;
     INT32 result = 0;
 
     CHK(filePath != NULL && pBuffer != NULL && readSize != 0, STATUS_NULL_ARG);
@@ -109,7 +109,7 @@ CleanUp:
 STATUS writeFile(PCHAR filePath, BOOL binMode, BOOL append, PBYTE pBuffer, UINT64 size)
 {
     STATUS retStatus = STATUS_SUCCESS;
-    FILE *fp = NULL;
+    FILE* fp = NULL;
 
     CHK(filePath != NULL && pBuffer != NULL, STATUS_NULL_ARG);
 
@@ -143,7 +143,7 @@ CleanUp:
 STATUS updateFile(PCHAR filePath, BOOL binMode, PBYTE pBuffer, UINT64 offset, UINT64 size)
 {
     STATUS retStatus = STATUS_SUCCESS;
-    FILE *fp = NULL;
+    FILE* fp = NULL;
     UINT32 i;
     PBYTE pCurPtr;
 
@@ -293,7 +293,7 @@ STATUS fileExists(PCHAR filePath, PBOOL pExists)
 STATUS createFile(PCHAR filePath, UINT64 size)
 {
     STATUS retStatus = STATUS_SUCCESS;
-    FILE *fp = NULL;
+    FILE* fp = NULL;
 
     CHK(filePath != NULL, STATUS_NULL_ARG);
 
@@ -301,7 +301,7 @@ STATUS createFile(PCHAR filePath, UINT64 size)
     CHK(fp != NULL, STATUS_OPEN_FILE_FAILED);
 
     if (size != 0) {
-        CHK(0 == FSEEK(fp, (UINT32) (size - 1), SEEK_SET), STATUS_INVALID_OPERATION);
+        CHK(0 == FSEEK(fp, (UINT32)(size - 1), SEEK_SET), STATUS_INVALID_OPERATION);
         CHK(0 == FPUTC(0, fp), STATUS_INVALID_OPERATION);
     }
 
