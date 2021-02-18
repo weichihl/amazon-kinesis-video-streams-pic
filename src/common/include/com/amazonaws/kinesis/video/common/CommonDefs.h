@@ -51,6 +51,7 @@ extern "C" {
 #define PACKED       __attribute__((__packed__))
 #define DISCARDABLE
 #else
+#define INLINE              inline
 #define LIB_EXPORT
 #define LIB_IMPORT
 #define LIB_INTERNAL
@@ -124,12 +125,16 @@ typedef long double LDOUBLE;
 #include <stdint.h>
 
 typedef char CHAR;
-typedef short WCHAR;
+#ifndef WCHAR
+typedef unsigned short          WCHAR;
+#endif
 typedef uint8_t UINT8;
 typedef int8_t INT8;
 typedef uint16_t UINT16;
 typedef int16_t INT16;
-typedef uint32_t UINT32;
+#ifndef UINT32
+typedef uint32_t                UINT32;
+#endif
 typedef int32_t INT32;
 typedef uint64_t UINT64;
 typedef int64_t INT64;
@@ -140,7 +145,7 @@ typedef float FLOAT;
 #else
 
 typedef char CHAR;
-typedef short WCHAR;
+//typedef short                   WCHAR; /////////////////////////////////Test
 typedef unsigned char UINT8;
 typedef char INT8;
 typedef unsigned short UINT16;
@@ -524,12 +529,14 @@ typedef LONG_PTR SSIZE_T, *PSSIZE_T;
 #include <sys/utsname.h>
 #endif
 
+#endif
+
 #if !defined(_MSC_VER) && !defined(__MINGW64__) && !defined(__MINGW32__) && !defined(__MACH__)
 // NOTE!!! For some reason memalign is not included for Linux builds in stdlib.h
 //#include <malloc.h>  //////////////////////////
 #endif
 
-#if defined __WINDOWS_BUILD__
+#if defined __WINDOWS_BUILD__ || defined _WIN32 || defined _WIN64 || defined __CYGWIN__
 
 // Include the posix IO
 #include <fcntl.h>

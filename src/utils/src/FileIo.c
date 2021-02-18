@@ -244,7 +244,8 @@ STATUS setFileLength(PCHAR filePath, UINT64 length)
                 retStatus = STATUS_INVALID_ARG_LEN;
                 break;
 
-            case EISDIR:
+            // FIXME: It needs definitaion of EISDIR.
+            //case EISDIR:
             case EBADF:
                 retStatus = STATUS_INVALID_ARG;
                 break;
